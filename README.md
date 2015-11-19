@@ -63,7 +63,7 @@ $data = json_encode($data);
 Response is stringified json, can use json_decode to change to json as below example:
 
 ```javascript
-$result = curl_wrap("contacts/search/email/test@email.com", null, "GET");
+$result = curl_wrap("contacts/search/email/test@email.com", null, "GET", "application/json");
 $result = json_decode($result, false, 512, JSON_BIGINT_AS_STRING);
 $contact_id = $result->id;
 print_r($contact_id);
@@ -132,7 +132,7 @@ $contact_json = array(
 );
 
 $contact_json = json_encode($contact_json);
-curl_wrap("contacts", $contact_json, "POST");
+curl_wrap("contacts", $contact_json, "POST", "application/json");
 ```
 
 #### 1.2 To fetch contact data
@@ -140,18 +140,18 @@ curl_wrap("contacts", $contact_json, "POST");
 ###### by id
 
 ```javascript
-curl_wrap("contacts/5722721933590528", null, "GET");
+curl_wrap("contacts/5722721933590528", null, "GET", "application/json");
 ```
 ###### by email
 
 ```javascript
-curl_wrap("contacts/search/email/test@email.com", null, "GET");
+curl_wrap("contacts/search/email/test@email.com", null, "GET", "application/json");
 ```
 
 #### 1.3 To delete a contact
 
 ```javascript
-curl_wrap("contacts/5722721933590528", null, "DELETE");
+curl_wrap("contacts/5722721933590528", null, "DELETE", "application/json");
 ```
 
 #### 1.4 To update a contact
@@ -185,7 +185,7 @@ $contact_json = array(
 );
 
 $contact_json = json_encode($contact_json);
-curl_wrap("contacts", $contact_json, "PUT");
+curl_wrap("contacts", $contact_json, "PUT", "application/json");
 ```
 
 #### 1.5 Update properties of a contact (Partial update)
@@ -221,7 +221,7 @@ $contact_json = array(
 );
 
 $contact_json = json_encode($contact_json);
-curl_wrap("contacts/edit-properties", $contact_json, "PUT");
+curl_wrap("contacts/edit-properties", $contact_json, "PUT", "application/json");
 ```
 
 #### 1.6 Edit star value 
@@ -234,7 +234,7 @@ $contact_json = array(
 );
 
 $contact_json = json_encode($contact_json);
-curl_wrap("contacts/add-star", $contact_json, "PUT");
+curl_wrap("contacts/add-star", $contact_json, "PUT", "application/json");
 ```
 
 #### 1.7 Add Score to a Contact using Email-ID 
@@ -307,19 +307,19 @@ $company_json = array(
 );
 
 $company_json = json_encode($company_json);
-curl_wrap("contacts", $company_json, "POST");
+curl_wrap("contacts", $company_json, "POST", "application/json");
 ```
 
 #### 2.2 To get a company
 
 ```javascript
-curl_wrap("contacts/5695414665740288", null, "GET");
+curl_wrap("contacts/5695414665740288", null, "GET", "application/json");
 ```
 
 #### 2.3 To delete a company
 
 ```javascript
-curl_wrap("contacts/5695414665740288", null, "DELETE")
+curl_wrap("contacts/5695414665740288", null, "DELETE", "application/json")
 ```
 #### 2.4 To update a company
 
@@ -342,7 +342,7 @@ $company_json = array(
 );
 
 $company_json = json_encode($company_json);
-curl_wrap("contacts", $company_json, "PUT");
+curl_wrap("contacts", $company_json, "PUT", "application/json");
 ```
 
 # 3. Deal (Opportunity)
@@ -371,25 +371,25 @@ $opportunity_json = array(
 );
 
 $opportunity_json = json_encode($opportunity_json);
-curl_wrap("opportunity", $opportunity_json, "POST");
+curl_wrap("opportunity", $opportunity_json, "POST", "application/json");
 ```
 #### 3.2 To get a deal
 
 ```javascript
-curl_wrap("opportunity/5739083074633728", null, "GET");
+curl_wrap("opportunity/5739083074633728", null, "GET", "application/json");
 ```
 
 #### 3.3 To delete a deal
 
 ```javascript
-curl_wrap("opportunity/5739083074633728", null, "DELETE");
+curl_wrap("opportunity/5739083074633728", null, "DELETE", "application/json");
 ```
 
 #### 3.4 To update deal
 
 ```javascript
 //Get deal by deal id to update.
-$deal = curl_wrap("opportunity/5712508065153024", null, "GET");
+$deal = curl_wrap("opportunity/5712508065153024", null, "GET", "application/json");
 
 $result = json_decode($deal, false, 512, JSON_BIGINT_AS_STRING); 
 
@@ -409,7 +409,7 @@ if (sizeof($result->notes) > 0) { // This code checks deal has any notes or not,
 }
 
 $opportunity_json = json_encode($result);
-curl_wrap("opportunity", $opportunity_json, "PUT");
+curl_wrap("opportunity", $opportunity_json, "PUT", "application/json");
 
 function setDealCustom($name, $value,$result){
 $custom_datas = $result->custom_data;
@@ -445,13 +445,13 @@ $note_json = array(
 );
 
 $note_json = json_encode($note_json);
-curl_wrap("notes", $note_json, "POST");
+curl_wrap("notes", $note_json, "POST", "application/json");
 ```
 
 #### 4.2 To get all notes *related to specific contact*
 
 ```javascript
-curl_wrap("contacts/5722721933590528/notes", null, "GET");
+curl_wrap("contacts/5722721933590528/notes", null, "GET", "application/json");
 ```
 
 #### 4.3 To update a note
@@ -466,7 +466,7 @@ $note_json = array(
 );
 
 $note_json = json_encode($note_json);
-curl_wrap("notes", $note_json, "PUT");
+curl_wrap("notes", $note_json, "PUT", "application/json");
 ```
 
 
@@ -486,19 +486,19 @@ $task_json = array(
 );
 
 $task_json = json_encode($task_json);
-curl_wrap("tasks", $task_json, "POST");
+curl_wrap("tasks", $task_json, "POST", "application/json");
 ```
 
 #### 5.2 To get a task
 
 ```javascript
-curl_wrap("tasks/5752207420948480", null, "GET");
+curl_wrap("tasks/5752207420948480", null, "GET", "application/json");
 ```
 
 #### 5.3 To delete a task
 
 ```javascript
-curl_wrap("tasks/5752207420948480", null, "DELETE");
+curl_wrap("tasks/5752207420948480", null, "DELETE", "application/json");
 ```
 
 #### 5.4 To update a task
@@ -516,7 +516,7 @@ $task_json = array(
 );
 
 $task_json = json_encode($task_json);
-curl_wrap("tasks", $task_json, "PUT");
+curl_wrap("tasks", $task_json, "PUT", "application/json");
 ``` 
 
 # 6. Event
@@ -532,13 +532,13 @@ $event_json = array(
 );
 
 $event_json = json_encode($event_json);
-curl_wrap("events", $event_json, "POST");
+curl_wrap("events", $event_json, "POST", "application/json");
 ```
 
 #### 6.2 To delete a event
 
 ```javascript
-curl_wrap("events/5703789046661120", null, "DELETE");
+curl_wrap("events/5703789046661120", null, "DELETE", "application/json");
 ```
 
 #### 6.3 To update a event
@@ -554,7 +554,7 @@ $event_json = array(
 );
 
 $event_json = json_encode($event_json);
-curl_wrap("events", $event_json, "PUT");
+curl_wrap("events", $event_json, "PUT", "application/json");
 ```
 
 # 7. Deal Tracks and Milestones
@@ -568,13 +568,13 @@ $milestone_json = array(
 );
 
 $milestone_json = json_encode($milestone_json);
-curl_wrap("milestone/pipelines", $milestone_json, "POST")
+curl_wrap("milestone/pipelines", $milestone_json, "POST", "application/json")
 ```
 
 #### 7.2 To get all tracks
 
 ```javascript
-curl_wrap("milestone/pipelines", null, "GET");
+curl_wrap("milestone/pipelines", null, "GET", "application/json");
 ```
 
 #### 7.3 To update track
@@ -587,46 +587,13 @@ $milestone_json = array(
 );
 
 $milestone_json = json_encode($milestone_json);
-curl_wrap("milestone/pipelines", $milestone_json, "PUT");
+curl_wrap("milestone/pipelines", $milestone_json, "PUT", "application/json");
 ```
 
 #### 7.4 To delete a track
 
 ```javascript
-curl_wrap("milestone/pipelines/5659711005261824", null, "DELETE");
-```
-
-# 8. Tags
-
-#### 8.1 To add tags to contact
-
-```javascript
-$tag_json = array(
-					"email" => "phprest@contact.com",
-					"tags" => "tag1, tag2, tag3, tag4, tag5"
-				 );
-
-$tag_json = json_encode($tag_json);
-curl_wrap("tags", $tag_json, "POST");
-```
-#### 8.2 To get tags related to contact
-
-```javascript
-$json = array("email" => "phprest@contact.com");
-
-$json = json_encode($json);
-curl_wrap("tags", $json, "GET");
-```
-#### 8.3 To remove tags related to contact
-
-```javascript
-$rm_tags_json = array(
-						"email" => "phprest@contact.com",
-						"tags" => "tag3, tag4"
-					 );
-
-$rm_tags_json = json_encode($rm_tags_json);
-curl_wrap("tags", $rm_tags_json, "PUT");
+curl_wrap("milestone/pipelines/5659711005261824", null, "DELETE", "application/json");
 ```
 
 ----
