@@ -1,18 +1,28 @@
 <?php
+
+/**
+ * Agile CRM \ Curl Wrap
+ * 
+ * The Curl Wrap is the entry point to all services and actions.
+ *
+ * @author    Agile CRM developers <Ghanshyam>
+ */
+
+
 # Enter your domain name , agile email and agile api key
 define("AGILE_DOMAIN", "ghanshyam");  # Example : define("domain","jim");
-define("AGILE_USER_EMAIL", "ghanshyam.raut@agilecrm.com"); 
+define("AGILE_USER_EMAIL", "ghanshyam.raut@agilecrm.com");
 define("AGILE_REST_API_KEY", "123456"); // Example : http://snag.gy/AEq23.jpg
-function curl_wrap($entity, $data, $method, $content_type)
-{
-    if($content_type==NULL){
+
+function curl_wrap($entity, $data, $method, $content_type) {
+    if ($content_type == NULL) {
         $content_type = "application/json";
     }
-    echo 'Your content type'.$content_type;
+    echo 'Your content type' . $content_type;
     echo '<br/><br/>';
-    
-    $agile_url     = "https://" . AGILE_DOMAIN . ".agilecrm.com/dev/api/" . $entity;
-    //$agile_php_url = "https://" . AGILE_DOMAIN . ".agilecrm.com/core/php/api/" . $entity . "?id=" . AGILE_REST_API_KEY;
+
+    $agile_url = "https://" . AGILE_DOMAIN . ".agilecrm.com/dev/api/" . $entity;
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
@@ -44,7 +54,7 @@ function curl_wrap($entity, $data, $method, $content_type)
             break;
     }
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "Content-type : $content_type;",'Accept : application/json'
+        "Content-type : $content_type;", 'Accept : application/json'
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_USERPWD, AGILE_USER_EMAIL . ':' . AGILE_REST_API_KEY);
@@ -54,6 +64,3 @@ function curl_wrap($entity, $data, $method, $content_type)
     curl_close($ch);
     return $output;
 }
-
-
-
