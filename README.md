@@ -3,11 +3,11 @@ PHP Client to access Agile functionality
 
 #Intro
 
-1. Fill in your **AGILE_DOMAIN**, **AGILE_USER_EMAIL**, **AGILE_REST_API_KEY** in [**PHP_API_v2.0.0.php**](https://github.com/agilecrm/php-api/blob/master/PHP_API_v2.0.0.php).
+1. Fill in your **AGILE_DOMAIN**, **AGILE_USER_EMAIL**, **AGILE_REST_API_KEY** in [**curlwrap_v2.php**](https://github.com/ghanraut/php-api/blob/master/curlwrap_v2.php).
 
-2. Copy and paste the source / include the [**PHP_API_v2.0.0.php**](https://github.com/agilecrm/php-api/blob/master/PHP_API_v2.0.0.php) in your php code.(Note: Few source code like create contact, update contact, get contact etc. all redy there. )
+2. Copy and paste the source / include the [**curlwrap_v2.php**](https://github.com/ghanraut/php-api/blob/master/curlwrap_v2.php) in your php code.
 
-3. You need to provide 3 paramaters to the curl_wrap function. They are **$entity**, **$data**, **$method**.
+3. You need to provide 4 paramaters to the curl_wrap function. They are **$entity**, **$data**, **$method**, **$content-type**.
 
 - **$entity** should be one of *"contacts/{id}", "contacts", "opportunity/{id}", "opportunity", "notes", "contacts/{contact_id}/notes", "contacts/{contact_id}/notes/{note_id}", "tasks/{id}", "tasks", "events", "events/{id}", "milestone/pipelines", "milestone/pipelines/{id}", "tags", "contacts/search/email/{email}"* depending on requirement.
   
@@ -51,6 +51,12 @@ $data = json_encode($data);
       
       DELETE to remove an entity.
 
+- **$content-type** can be set to
+	
+	application/json.
+
+	application/x-www-form-urlencoded (To valid form type data)
+
 #Usage
 
 
@@ -58,8 +64,9 @@ Response is stringified json, can use json_decode to change to json as below exa
 
 ```javascript
 $result = curl_wrap("contacts/search/email/test@email.com", null, "GET");
-$result = json_decode($result, true);
-$contact_id = $result['id'];
+$result = json_decode($result, false, 512, JSON_BIGINT_AS_STRING);
+$contact_id = $result->id;
+print_r($contact_id);
 ``` 
 
 ## 1. Contact
