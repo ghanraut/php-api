@@ -3,9 +3,9 @@ PHP Client to access Agile functionality
 
 #Intro
 
-1. Fill in your **AGILE_DOMAIN**, **AGILE_USER_EMAIL**, **AGILE_REST_API_KEY** in [**curlwrap_v2.php**](https://github.com/ghanraut/php-api/blob/master/curlwrap_v2.php).
+1. Fill in your **AGILE_DOMAIN**, **AGILE_USER_EMAIL**, **AGILE_REST_API_KEY** in [**curlwrap_v2.php**](https://github.com/ghanraut/php-api/blob/master/CurlLib/curlwrap_v2.php).
 
-2. Copy and paste the source / include the [**curlwrap_v2.php**](https://github.com/ghanraut/php-api/blob/master/curlwrap_v2.php) in your php code.
+2. Copy and paste the source / include the [**curlwrap_v2.php**](https://github.com/ghanraut/php-api/blob/master/CurlLib/curlwrap_v2.php) in your php code.
 
 3. You need to provide 4 paramaters to the curl_wrap function. They are **$entity**, **$data**, **$method**, **$content-type**.
 
@@ -47,7 +47,7 @@ $data = json_encode($data);
       
       GET to fetch an entity.
       
-      PUT to update entity.
+      PUT to update an entity.
       
       DELETE to remove an entity.
 
