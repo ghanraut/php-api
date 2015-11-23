@@ -347,6 +347,8 @@ curl_wrap("contacts", $company_json, "PUT", "application/json");
 
 # 3. Deal (Opportunity)
 
+- **Note** Milestone name is case sensitive. It should be exactly as in your Agile CRM
+
 #### 3.1 To create a deal
 
 ```javascript
@@ -387,49 +389,65 @@ curl_wrap("opportunity/5739083074633728", null, "DELETE", "application/json");
 
 #### 3.4 To update deal
 
+- **Note** Please send all data related to deal.
+
 ```javascript
-//Get deal by deal id to update.
-$deal = curl_wrap("opportunity/5712508065153024", null, "GET", "application/json");
+$opportunity_json = array(
+    "id" => "5202889022636032", //It is mandatory filed. Id of deal
+    "description" => "this is a test deal",
+    "expected_value" => 1000,
+    "milestone" => "Open",
+    "pipeline_id" => "5502889022636568",
+    "custom_data" => array(
+        array(
+            "name" => "dataone",
+            "value" => "xyz"
+        ),
+        array(
+            "name" => "datatwo",
+            "value" => "abc"
+        )
+    ),
+    "probability" => 50,
+    "close_date" => 1414317504,
+    "contact_ids" => array("5641841626054656", "5756422495141888")
+);
 
-$result = json_decode($deal, false, 512, JSON_BIGINT_AS_STRING); 
-
-$result->name="hello test deal"; 		// Set deal name with new data.
-$result->expected_value="1000"; // Set deal expected_value with new data. Value should not be null.
-$result->milestone="New"; // Milestone name should be exactly  as in agilecrm website. http://snag.gy/xjAbc.jpg
-$result->pipeline_id="5767790501822464"; 
-
-// If you are updating milestone then pipeline_id is mandatory field. pipeline_id is the id of track,
-// Otherwise comment milestone and pipeline_id to just change other field.
-
-setDealCustom("dealTester","this is text custom data",$result); // Set Custom filed dealTester with new data.This is example of text field type.
-setDealCustom("dealAddedDate","11/25/2015",$result); // Set Custom filed dealAddedDate with new data.This is example of date filed type.
-
-if (sizeof($result->notes) > 0) { // This code checks deal has any notes or not, don't remove this if condition. 
-    $result->notes=$result->note_ids;
-}
-
-$opportunity_json = json_encode($result);
+$opportunity_json = json_encode($opportunity_json);
 curl_wrap("opportunity", $opportunity_json, "PUT", "application/json");
+```
 
-function setDealCustom($name, $value,$result){
-$custom_datas = $result->custom_data;
-foreach ($custom_datas as $custom_data1) {
-	
-	if (strcasecmp($name, $custom_data1->name) == 0) {
-		$custom_data1->value=$value;
-		return;
-	}
-}
+#### 3.5 To update deal (Partial update)
 
-$contactField = (object) array(
-	"name" => $name,
-    "value" => $value
-   );
+```javascript
+$opportunity_json = array(
+    "id" => "5202889022636032", //It is mandatory filed. Id of deal
+    "expected_value" => 1000,
+    "milestone" => "Open",
+    "pipeline_id" => "5502889022636568",
+    "custom_data" => array(
+        array(
+            "name" => "dataone",
+            "value" => "xyz"
+        ),
+        array(
+            "name" => "datatwo",
+            "value" => "abc"
+        )
+    ),
+    "probability" => 50,
+    "close_date" => 1414317504,
+    "contact_ids" => array("5641841626054656", "5756422495141888")
+);
 
-  $custom_datas[]=$contactField;
-  $result->custom_data=$custom_datas;
+$opportunity_json = json_encode($opportunity_json);
+curl_wrap("opportunity/partial-update", $opportunity_json, "PUT", "application/json");
+```
 
-}
+#### 3.6 Get deals related to specific contact by contact id
+
+```javascript
+curl_wrap("contacts/5739083074633728/deals", null, "GET", "application/json");
 ```
 
 # 4. Note
