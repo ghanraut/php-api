@@ -20,9 +20,7 @@ function curl_wrap($entity, $data, $method, $content_type) {
     if ($content_type == NULL) {
         $content_type = "application/json";
     }
-    echo 'Your content type' . $content_type;
-    echo '<br/><br/>';
-
+   
     $agile_url = "https://" . AGILE_DOMAIN . ".agilecrm.com/dev/api/" . $entity;
 
     $ch = curl_init();
