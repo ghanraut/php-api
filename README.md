@@ -161,7 +161,7 @@ curl_wrap("contacts/5722721933590528", null, "DELETE", "application/json");
 ```javascript
 
 $contact_json = array(
-  "id"=>5722721933590528,//It is mandatory filed. Id of contact
+  "id"=>"5722721933590528",//It is mandatory filed. Id of contact
   "lead_score"=>"80",
   "star_value"=>"5",
   "tags"=>array("Player","Winner"),
